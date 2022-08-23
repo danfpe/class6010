@@ -6,10 +6,12 @@
 //
 
 #include <iostream>
-
+using namespace std;
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::cout << "Hello, World!\n";
-    std::cout << "Make the World better!\n";
+    int a = 2, b = 3;
+    cout << "Hello, World!\n";
+    cout << "Make the World better! " << "GOOGLE" << endl;
+    cout << a << " " << b << endl;
     return 0;
 }
