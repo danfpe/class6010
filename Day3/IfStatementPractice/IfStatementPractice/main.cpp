@@ -42,7 +42,6 @@ int main(int argc, const char * argv[]) {
     char weekdayResponse = 'N';
     char holidayResponse = 'N';
     char haveChildResponse = 'N';
-    char isSleep = 'N';
     
     cout << "whether or not it's a weekday(Y/N)" << endl;
     cin >> weekdayResponse;
@@ -50,36 +49,16 @@ int main(int argc, const char * argv[]) {
     cin >> holidayResponse;
     cout << "Please enter whether or not you have young children(Y/N)" << endl;
     cin >> haveChildResponse;
-    cout << "whether the user gets to sleep in today or not(Y/N)" << endl;
-    cin >> isSleep;
     
-    if (weekdayResponse == 'Y') {
-        cout << "It's a weekday \n";
+    if (haveChildResponse == 'Y' || haveChildResponse == 'y') {
+        cout << "no sleep today" << endl;
     }
-    else {
-        cout << "It's not a weekday \n";
+    else if (weekdayResponse == 'N' || weekdayResponse == 'n') {
+        cout << "get to sleep today" << endl;
     }
-    
-    if (holidayResponse == 'Y') {
-        cout << "It's a holiday\n";
-    }
-    else {
-        cout << "It's not a holiday\n";
-    }
-    
-    if (haveChildResponse == 'Y') {
-        cout << "have children\n";
-    }
-    else {
-        cout << "no children\n";
-    }
-    
-    if (isSleep == 'Y') {
-        cout << "get to sleep today\n";
-    }
-    else {
-        cout << "no sleep\n";
-    }
-    
+    else if (holidayResponse == 'Y' || holidayResponse == 'y')
+        cout << "get to sleep today" << endl;
+    else
+        cout << "no sleep today" << endl;
     return 0;
 }
