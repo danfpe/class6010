@@ -1,7 +1,7 @@
 /*
   Author: Daniel Kopta and ??
   July 2017
-  
+  updated by Danfa Peng
   CS 6010 Fall 2019
   Vector util library definitions
   Complete the functions defined in this file.
