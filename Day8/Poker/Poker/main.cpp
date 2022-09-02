@@ -40,11 +40,11 @@ int main(int argc, const char * argv[]) {
     }
     
     cout << "the statistics: " << "\n";
-    cout << "Flush percentage: " << flushCount << (double) flushCount/times * 100 <<"%\n";
-    cout << "Straight percentage: " << straightCount << (double) flushCount/times * 100 <<"%\n";
-    cout << "StraightFlush percentage: " << straightFlushCout <<(double) straightFlushCout/times * 100 <<"%\n";
-    cout << "RoyalFlush percentage: " << royalCount <<(double) royalCount/times * 100 <<"%\n";
-    cout << "FullHouse percentage: " << fullHouseCount <<(double) fullHouseCount/times * 100 <<"%\n";
+    cout << "Flush count and percentage: " << flushCount << " "<< (double) flushCount/times * 100 <<"%\n";
+    cout << "Straight count and percentage: " << straightCount <<" "<< (double) flushCount/times * 100 <<"%\n";
+    cout << "StraightFlush count and percentage: " << straightFlushCout <<" "<<(double) straightFlushCout/times * 100 <<"%\n";
+    cout << "RoyalFlush count and percentage: " << royalCount <<" "<<(double) royalCount/times * 100 <<"%\n";
+    cout << "FullHouse count and percentage: " << fullHouseCount <<" "<<(double) fullHouseCount/times * 100 <<"%\n";
     
     return 0;
 }
