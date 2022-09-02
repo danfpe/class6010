@@ -63,7 +63,7 @@ vector<Card> pickingUpCards(vector<Card>& cardVector) {
     return hand;
 }
 
-bool isFlush(vector<Card> cardVector) {
+bool isFlush(vector<Card>& cardVector) {
     for(int i=0; i<4; i++) {
         if (cardVector[i].suit != cardVector[i+1].suit) {
             return false;
@@ -93,15 +93,19 @@ int stringRankToInt(string stringRank) {
     return rank;
 }
 
-vector<int> extractRank(vector<Card> cardVector) {
+vector<int> extractRank(vector<Card>& cardVector) {
     vector<int> rankVector;
-    for (Card card:cardVector) {
+    for (auto card:cardVector) {
         rankVector.push_back(stringRankToInt(card.rank));
     }
     return rankVector;
 }
 
-bool isStraight(vector<Card> cardVector) {
+bool compareRank(const Card & a, const Card & b) {
+    return a.rank < b.rank;
+}
+
+bool isStraight(vector<Card>& cardVector) {
     vector<int> cardRank = extractRank(cardVector);
     sort(cardRank.begin(), cardRank.end());
     
@@ -114,32 +118,33 @@ bool isStraight(vector<Card> cardVector) {
     return true;
 }
 
-bool isStraightFlush(vector<Card> cardVector) {
-    return isFlush(cardVector) && isStraight(cardVector);
+bool isStraightFlush(vector<Card>& cardVector) {
+    return (isFlush(cardVector) && isStraight(cardVector));
 }
 
-bool isRoyalFlush(vector<Card> cardVector) {
+bool isRoyalFlush(vector<Card>& cardVector) {
     vector<int> rankVector;
-    if (isFlush(cardVector) && isStraight(cardVector)) {
+    if (isStraightFlush(cardVector)) {
         rankVector = extractRank(cardVector);
-        int minValue = *min_element(rankVector.begin(), rankVector.end());
-        if (minValue == 10) {
+        sort(rankVector.begin(), rankVector.end());
+        if (rankVector[0] == 10) {
             return true;
         }
     }
     return false;
 }
 
-bool isFullHouse(vector<Card> cardVector) {
+bool isFullHouse(vector<Card>& cardVector)
+{
     vector<int> rankVector = extractRank(cardVector);
     sort(rankVector.begin(), rankVector.end());
-    int position = 0;
-    for(int i = 0; i < rankVector.size() - 1; i++) {
-        if (abs(rankVector[i+1] - rankVector[i]) > 1 ) {
-            position = i;
-        }
+    if ((rankVector[0] == rankVector[1]) && (rankVector[2] == rankVector[3]) && (rankVector[3] == rankVector[4])){
+        return true;
     }
-    return (position == 1 || position == 2);
+    else if ((rankVector[0] == rankVector[1]) && (rankVector[2] == rankVector[3]) && (rankVector[3] == rankVector[4])) {
+        return true;
+    }
+    return false;
 }
     
     

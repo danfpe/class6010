@@ -14,22 +14,37 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     // calling functions
     vector<Card> vectorCard = creatingCards();
-    shufflingCards(vectorCard);
-    vector<Card> hand = pickingUpCards(vectorCard);
+    int times = 0;
+    cout << "input the simulation times:" << "\n";
+    cin >> times;
+    int flushCount, straightCount, straightFlushCout, royalCount, fullHouseCount;
+    flushCount = straightCount = straightFlushCout = royalCount = fullHouseCount = 0;
+    for (int i = 0; i < times; i++) {
+        shufflingCards(vectorCard);
+        vector<Card> hand = pickingUpCards(vectorCard);
+        if (isFlush(hand) == true) {
+            flushCount++;
+        }
+        if (isStraight(hand)== true) {
+            straightCount++;
+        }
+        if (isStraightFlush(hand) == true) {
+            straightFlushCout++;
+        }
+        if (isRoyalFlush(hand) == true) {
+            royalCount++;
+        }
+        if (isFullHouse(hand) == true) {
+            fullHouseCount++;
+        }
+    }
     
-    // sample hands
-    hand = {{"Hearts", "A"}, {"Hearts", "K"}, {"Hearts", "Q"}, {"Hearts", "J"}, {"Hearts", "10"}};
-    vector<Card> full_house = {{"Hearts", "A"}, {"Diamonds", "A"}, {"Clubs", "10"}, {"Hearts", "10"}, {"Spades", "10"}};
-    printingCards(hand);
-    cout << "\n";
+    cout << "the statistics: " << "\n";
+    cout << "Flush percentage: " << flushCount << (double) flushCount/times * 100 <<"%\n";
+    cout << "Straight percentage: " << straightCount << (double) flushCount/times * 100 <<"%\n";
+    cout << "StraightFlush percentage: " << straightFlushCout <<(double) straightFlushCout/times * 100 <<"%\n";
+    cout << "RoyalFlush percentage: " << royalCount <<(double) royalCount/times * 100 <<"%\n";
+    cout << "FullHouse percentage: " << fullHouseCount <<(double) fullHouseCount/times * 100 <<"%\n";
     
-    // test cases
-    assert(isFlush(hand) == true);
-    assert(isStraight(hand)== true);
-    assert(isStraightFlush(hand) == true);
-    assert(isRoyalFlush(hand) == true);
-    assert(isFullHouse(full_house) == true);
-    
-    cout << "test passed" << "\n";
     return 0;
 }
