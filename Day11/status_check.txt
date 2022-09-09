@@ -1,0 +1,73 @@
+part 1
+
+int num;
+int sum = 0;
+
+for(int i = 0; i < 10; i++) {
+    std::cout << "please input the number: " << "\n";
+    std::cin >> num;
+    if (num == -99) {
+        exit(0);
+    }
+    sum += num;
+    if (i == 3) {
+        std::cout << sum;
+    }
+}
+
+
+part 2
+
+clang++ -c my_lib.cpp main.cpp
+clang++ -o myProg my_lib.o main.o
+
+part 3
+
+a. an array only store the same type of data, the structure is definded by users and can be stored 
+different types of data.
+
+b. 
+struct Dog {
+        std::string name;
+        int age;
+        bool is_vaccinated;
+    };
+Dog dog;
+dog.name = "hello";
+dog.age = 3;
+dog.is_vaccinated = true;
+
+c. 
+std::vector<Dog> dogvector;
+
+part 4
+
+bool isVowel(char character) {
+    std::tolower(character);
+    return (character == 'a' || character == 'o' || character == 'e' || character == 'i' || character == 'u');
+}
+
+int numOfVowel(std::string word) {
+    int count = 0;
+    for(char c: word) {
+        if (isVowel(c)) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int main(int argc, const char * argv[]) {
+    std::ifstream inputfile ("star_wars.txt");
+    std::vector<std::string> words;
+    std::string word;
+    while(inputfile >> word) {
+        words.push_back(word);
+    }
+    int num = 0;
+    for (int i = 0; i < words.size() - 1; i++) {
+        num += numOfVowel(words[i]);
+    }
+    std::cout << num;
+    return 0;
+}
