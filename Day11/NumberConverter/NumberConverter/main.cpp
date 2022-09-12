@@ -12,12 +12,17 @@
 #include <fstream>
 
 int stringToInt(std::string inputNum, int inputbase) {
+    // initialization
     int decimal = 0;
     char flag = ' ';
+    
+    // is negative
     if (inputNum[0] == '-') {
         flag = '-';
         inputNum = inputNum.substr(1, inputNum.size() - 1);
     }
+    
+    // converting
     for(int i = int(inputNum.size()-1) ; i >= 0; i--) {
         if (inputNum[i] >= '0' && inputNum[i] <= '9') {
             decimal += (inputNum[i] - '0') * pow(inputbase, inputNum.size()- 1 - i);
@@ -29,6 +34,7 @@ int stringToInt(std::string inputNum, int inputbase) {
             decimal += (int(inputNum[i]) - 87) * pow(inputbase, inputNum.size()- 1 - i);
         }
     }
+    
     if (flag == '-') {
         return -decimal;
     }
