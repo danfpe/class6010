@@ -23,7 +23,7 @@ int main(int argc, const char * argv[]) {
         // input checking
         if (inputSentences == "done") {
             cout << "Goodbye" << endl;
-            break;
+            exit(0);
         }
         
         // output result

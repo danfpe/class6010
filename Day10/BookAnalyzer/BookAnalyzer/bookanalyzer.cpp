@@ -14,7 +14,11 @@
 std::vector<std::string> extractWords(std::string filename){
     std::vector<std::string> wordList;
     std::string word;
+    std::string word1;
     std::ifstream myStream(filename);
+    while (myStream >> word >> word1) {
+        std::cout << word << " " << word1;
+    }
     if(myStream.fail()) {
         std::cout << "Failed to open file.\n";
         exit(1);

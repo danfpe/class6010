@@ -68,52 +68,23 @@ std::string intToHexString(int decimalNum) {
     return result;
 }
 
-bool isVowel(char character) {
-    std::tolower(character);
-    return (character == 'a' || character == 'o' || character == 'e' || character == 'i' || character == 'u');
-}
-
-int numOfVowel(std::string word) {
-    int count = 0;
-    for(char c: word) {
-        if (isVowel(c)) {
-            count++;
-        }
-    }
-    return count;
-}
-
 int main(int argc, const char * argv[]) {
     // insert code here...
     std::string inputNum;
-//    int inputbase;
-//    int decimal = 0;
+    int inputbase;
+    int decimal = 0;
     
-//    std::cout << "please input the number: \n";
-//    std::cin >> inputNum;
-//    std::cout << "please input the base: \n";
-//    std::cin >> inputbase;
-//
-//    decimal = stringToInt(inputNum, inputbase);
-//    std::cout << "the result: " << decimal << "\n";
+    std::cout << "please input the number: \n";
+    std::cin >> inputNum;
+    std::cout << "please input the base: \n";
+    std::cin >> inputbase;
+
+    decimal = stringToInt(inputNum, inputbase);
+    std::cout << "the result: " << decimal << "\n";
     
-//    assert(intToDecimalString(10) == "10");
-//
-//    std::cout<< "result: " << intToBinaryString(12);
-//    std::cout<< "hex string: " << intToHexString(16);
-    
-    
-    std::cout << numOfVowel("abcd");
-    std::ifstream inputfile ("star_wars.txt");
-    std::vector<std::string> words;
-    std::string word;
-    while(inputfile >> word) {
-        words.push_back(word);
-    }
-    int num = 0;
-    for (int i = 0; i < words.size() - 1; i++) {
-        num += numOfVowel(words[i]);
-    }
-    std::cout << num;
-    return 0;
+    assert(intToDecimalString(10) == "10");
+
+    std::cout<< "result: " << intToBinaryString(12);
+    std::cout<< "hex string: " << intToHexString(16);
+
 }

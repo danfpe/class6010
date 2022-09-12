@@ -15,6 +15,7 @@ int main(int argc, const char * argv[]) {
     // calling functions
     vector<Card> vectorCard = creatingCards();
     int times = 0;
+    srand (time(NULL));
     cout << "input the simulation times:" << "\n";
     cin >> times;
     int flushCount, straightCount, straightFlushCout, royalCount, fullHouseCount;
@@ -41,7 +42,7 @@ int main(int argc, const char * argv[]) {
     
     cout << "the statistics: " << "\n";
     cout << "Flush count and percentage: " << flushCount << " "<< (double) flushCount/times * 100 <<"%\n";
-    cout << "Straight count and percentage: " << straightCount <<" "<< (double) flushCount/times * 100 <<"%\n";
+    cout << "Straight count and percentage: " << straightCount <<" "<< (double) straightCount/times * 100 <<"%\n";
     cout << "StraightFlush count and percentage: " << straightFlushCout <<" "<<(double) straightFlushCout/times * 100 <<"%\n";
     cout << "RoyalFlush count and percentage: " << royalCount <<" "<<(double) royalCount/times * 100 <<"%\n";
     cout << "FullHouse count and percentage: " << fullHouseCount <<" "<<(double) fullHouseCount/times * 100 <<"%\n";

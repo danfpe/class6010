@@ -49,7 +49,6 @@ void shufflingCards(vector<Card>& cardVector) {
     const int N = 52;
     for(int i = N - 1; i > 0; i--) {
         int randNum = std::rand()%i;
-        srand (time(NULL));
         swapCards(cardVector[i], cardVector[randNum]);
     }
 }

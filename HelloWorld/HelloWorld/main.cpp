@@ -6,22 +6,28 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include <vector>
 using namespace std;
 int main(int argc, const char * argv[]) {
     // insert code here...
-    int a = 2, b = 3;
-    string cars[4] = {"Volvo", "BMW", "Ford", "Mazda"};
-    float myNumber = 4.55;
-    double myDoubleNumber = 5.89;
-    char myLetter = 'D';
-    bool myBoolean = true;
-    cout << "Hello, World!\n";
-    cout << "Make the World better! " << "GOOGLE" << endl;
-    cout << a << " " << b << endl;
-    cout << cars[0] << endl;
-    cout << myNumber << endl;
-    cout << myDoubleNumber << endl;
-    cout << myLetter << endl;
-    cout << myBoolean << endl;
+    //create a file, write to it
+    ofstream myfileI ("input.txt", ios::app);
+    if (myfileI.is_open())
+    {
+        myfileI << "I am adding a line.\n";
+        myfileI << "I am adding another line.\n";
+        myfileI.close();
+    }
+    else cout << "Unable to open file for writing";
+
+    //create an input stream to read the file
+    string filename = "input.txt";
+    ifstream myStream(filename);
+    string word1, word2;
+    myStream >> word1 >> word2;
+    while (myStream >> word1) {
+        cout << "read in " << word1 << "\n";
+    }
     return 0;
 }
