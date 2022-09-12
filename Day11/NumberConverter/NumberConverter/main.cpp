@@ -13,6 +13,11 @@
 
 int stringToInt(std::string inputNum, int inputbase) {
     int decimal = 0;
+    char flag = ' ';
+    if (inputNum[0] == '-') {
+        flag = '-';
+        inputNum = inputNum.substr(1, inputNum.size() - 1);
+    }
     for(int i = int(inputNum.size()-1) ; i >= 0; i--) {
         if (inputNum[i] >= '0' && inputNum[i] <= '9') {
             decimal += (inputNum[i] - '0') * pow(inputbase, inputNum.size()- 1 - i);
@@ -23,6 +28,9 @@ int stringToInt(std::string inputNum, int inputbase) {
         else if (inputNum[i] >= 'a' && inputNum[i] <= 'f') {
             decimal += (int(inputNum[i]) - 87) * pow(inputbase, inputNum.size()- 1 - i);
         }
+    }
+    if (flag == '-') {
+        return -decimal;
     }
     return decimal;
 }
@@ -46,6 +54,11 @@ std::string intToBinaryString(int decimalNum) {
 std::string intToHexString(int decimalNum) {
     // converting deciaml to hex
     std::string result = "";
+    bool is_negative = false;
+    if (decimalNum < 0) {
+        is_negative = true;
+        decimalNum = abs(decimalNum);
+    }
     int remainder;
     while (decimalNum > 0) {
         remainder = decimalNum % 16;
@@ -61,30 +74,30 @@ std::string intToHexString(int decimalNum) {
             }
         }
         else {
-            result = char(remainder + 48) + result;
+            result = char(remainder + 48) + result; // int to char
         }
         decimalNum = decimalNum/16;
+    }
+    if (is_negative) {
+        return '-' + result;
     }
     return result;
 }
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::string inputNum;
-    int inputbase;
-    int decimal = 0;
-    
-    std::cout << "please input the number: \n";
-    std::cin >> inputNum;
-    std::cout << "please input the base: \n";
-    std::cin >> inputbase;
 
-    decimal = stringToInt(inputNum, inputbase);
-    std::cout << "the result: " << decimal << "\n";
-    
-    assert(intToDecimalString(10) == "10");
 
-    std::cout<< "result: " << intToBinaryString(12);
-    std::cout<< "hex string: " << intToHexString(16);
+    assert(stringToInt("10", 10) == 10);
+    assert(stringToInt("10", 2) == 2);
+    assert(stringToInt("10", 16) == 16);
+    
+    assert(intToDecimalString(-10) == "-10");
+    assert(intToBinaryString(12) == "1100");
+    assert(intToHexString(-10) == "-A");
+    assert(stringToInt( intToHexString( 10 ), 16 ) == 10);
+    
+    std::cout << "all test passed" << "\n";
+
 
 }
