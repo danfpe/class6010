@@ -36,36 +36,12 @@ using namespace std;
  *   GetBit(-42, 31) -> returns true
  */
 
-string DecimalToBinary(int num)
-{
-    string str;
-    if (num == 0) {
-        return "0";
-    }
-      while(num){
-          if(num & 1) // 1
-            str ='1' + str;
-          else // 0
-            str ='0' + str;
-          num>>=1; // Right Shift by 1
-    }
-      return str;
-}
 
-bool GetBit( int32_t input, int b )
+bool GetBit( uint32_t input, int b )
 {
   // TODO: Fill in. Do not return false.
-    string result;
-    if (input >= 0) {
-        result = DecimalToBinary(input);
-    } else {
-        input = (unsigned int)input;
-        cout << "input :" << input<< "\n";
-        result = DecimalToBinary(abs(input));
-        bitset<32> b1(result);
-    }
+    return (input >> b) & 1;
     
-  return result[result.size() - 1 - b] == '1';
 }
 
 
@@ -100,21 +76,18 @@ bool IsNegative( int input )
  *   NumBitsSet(64) -> returns 1
  *   NumBitsSet(-1) -> returns 32
  */
-int NumBitsSet( int32_t input )
+int NumBitsSet( uint32_t input )
 {
   // TODO: Fill in. Do not return 0.
-    string result;
-    if (input < 0) {
-            input = 0xFFFFFFFF;
-        return 32;
-        }
-    
-    result = DecimalToBinary(input);
+    if (input == 0) {
+        return 0;
+    }
     int n = 0;
-    for(int i=0; i < result.size(); i++) {
-        if(result[i] == '1') {
-            ++n;
+    while (input != 0) {
+        if (input & 1) {
+            n++;
         }
+        input >>= 1;
     }
   return n;
 }
@@ -152,7 +125,6 @@ unsigned char GetByte( uint32_t input, int b )
         input = input & 0xFF000000;
     }
     input = input >> (b * 8);
-    cout << "get byte: " << input << "\n";
     return input;
 }
 
@@ -178,7 +150,22 @@ unsigned char GetByte( uint32_t input, int b )
 uint32_t SetByte( uint32_t input, uint8_t value, int b )
 {
   // TODO: Fill in. Do not return 0.
-  return 0;
+    uint32_t mask;
+    uint32_t result;
+    if (b == 0) {
+        mask = 0xFFFFFF00;
+    }
+    else if (b == 1) {
+        mask = 0xFFFF00FF;
+        }
+    else if (b == 2) {
+        mask = 0xFF00FFFF;
+        }
+    else if (b == 3) {
+        mask = 0x00FFFFFF;
+        }
+    result = (input & mask) | (value << b*8);
+  return result;
 }
 
 
@@ -211,7 +198,8 @@ int Negate( int input )
   // Note, it may help to do the challenge question (see below) before implementing this one...
 
   // TODO: Fill in. Do not return 0.
-  return 0;
+    // Two's complement
+    return (~input + 1);
 }
 
 
@@ -222,7 +210,7 @@ int Negate( int input )
  * This function should return x + 1 but should only make use of bitwise operators and == or !=
 */
 int Increment( uint32_t x ){
-  return 0;
+    return (-(~x));
 }
 
 
@@ -288,10 +276,6 @@ int main()
    * such as alternating 10101010... (0xaa), or 01010101... (0x55),
    * or all ones in a certain byte: 0x00ff0000
    */
-    int a=12, b=1;
-    cout << "5 & 1: "<< (a & b) << "   "<< "\n";
-    uint32_t x = 2e32 - 1;
-    cout << DecimalToBinary(0)<< "\n";
   TestBool( GetBit( 0, 0 ), false, "GetBit1" );
   TestBool( GetBit( 0, 1 ), false, "GetBit2" );
   TestBool( GetBit( 0, 31 ), false, "GetBit3" );

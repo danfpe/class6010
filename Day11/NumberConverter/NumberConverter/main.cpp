@@ -93,7 +93,6 @@ std::string intToHexString(int decimalNum) {
 int main(int argc, const char * argv[]) {
     // insert code here...
 
-
     assert(stringToInt("10", 10) == 10);
     assert(stringToInt("10", 2) == 2);
     assert(stringToInt("10", 16) == 16);
