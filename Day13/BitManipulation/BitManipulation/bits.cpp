@@ -59,7 +59,7 @@ bool GetBit( uint32_t input, int b )
 bool IsNegative( int input )
 {
   // TODO: Fill in. Do not return false.
-    return input < 0;
+    return input >> 31;
 }
 
 /*
