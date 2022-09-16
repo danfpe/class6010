@@ -14,7 +14,7 @@
 #include <cstdlib>
 #include <vector>
 
-std::vector<std::string> extractWords(std::string filename);
+std::vector<std::string> extractWords(const std::string& filename);
 void findTitleAuthor(std::vector<std::string>& wordList, std::string& title, std::string& author);
 void countCharNum(std::vector<std::string>& wordList, int& charNum);
 void minMaxLengthWords(const std::vector<std::string> & wordList, std::string& minWord, std::string& maxWord);

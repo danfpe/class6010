@@ -161,7 +161,7 @@ uint32_t SetByte( uint32_t input, uint8_t value, int b )
     else if (b == 2) {
         mask = 0xFF00FFFF;
         }
-    else if (b == 3) {
+    else {
         mask = 0x00FFFFFF;
         }
     result = (input & mask) | (value << b*8);

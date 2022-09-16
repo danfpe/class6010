@@ -11,14 +11,11 @@
 #include <cstdlib>
 #include <vector>
 
-std::vector<std::string> extractWords(std::string filename){
+std::vector<std::string> extractWords(const std::string& filename){
     std::vector<std::string> wordList;
     std::string word;
-    std::string word1;
     std::ifstream myStream(filename);
-    while (myStream >> word >> word1) {
-        std::cout << word << " " << word1;
-    }
+    
     if(myStream.fail()) {
         std::cout << "Failed to open file.\n";
         exit(1);
@@ -31,8 +28,7 @@ std::vector<std::string> extractWords(std::string filename){
 
 void findTitleAuthor(std::vector<std::string>& wordList, std::string& title, std::string& author) {
     int NUM = 100;
-    int titlePos, authorPos, releasePos;
-    titlePos = authorPos = releasePos = -1;
+    int titlePos=-1, authorPos=-1, releasePos=-1;
     for(int i = 0; i < NUM; i++) {
         if (wordList[i].find("Title") != std::string::npos) {
             titlePos = i;
@@ -42,20 +38,21 @@ void findTitleAuthor(std::vector<std::string>& wordList, std::string& title, std
         }
         else if (wordList[i].find("Release") != std::string::npos) {
             releasePos = i;
-            break;
+            break; // this assumes title then author then release in the book file
         }
     }
     if (titlePos == -1 || authorPos == -1 || releasePos == -1) {
         title = "unknown";
         author = "unknown";
+        return;
     }
     
     for(int i = titlePos + 1; i < authorPos; i++) {
-        title = title + " " + wordList[i];
+        title = title +  wordList[i] + " ";
     }
     
     for(int i = authorPos + 1; i < releasePos; i++) {
-        author = author + " " + wordList[i];
+        author = author + wordList[i] + " ";
     }
 }
 
@@ -69,19 +66,18 @@ void minMaxLengthWords(const std::vector<std::string> & wordList, std::string& m
     int minLen, maxLen, minLoc, maxLoc;
     minLoc = maxLoc = 0;
     minLen = maxLen = wordList[0].length();
+    
+    minWord = wordList[0];
+    maxWord = wordList[0];
     for(int i = 1; i < wordList.size(); i++) {
-        if (minLen > wordList[i].length()) {
-            minLen = wordList[i].length();
-            minLoc = i;
+        if (minWord.length() > wordList[i].length()) {
+            minWord = wordList[i];
         }
         
-        if (maxLen < wordList[i].length()) {
-            maxLen = wordList[i].length();
-            maxLoc = i;
+        if (maxWord.length() < wordList[i].length()) {
+            maxWord = wordList[i];
         }
     }
-    minWord = wordList[minLoc];
-    maxWord = wordList[maxLoc];
 }
 
 void findKeyWord(const std::vector<std::string> & wordList, std::string keyword, int charNum) {
