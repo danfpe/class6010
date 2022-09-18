@@ -7,11 +7,11 @@
 
 #include "structPart.hpp"
 
-size_t* MyVector::makeVector(size_t initialCapacity) {
-    _capacity = initialCapacity;
-    setSize(0);
-    data = new size_t[initialCapacity];
-    return data;
+size_t* makeVector(MyVector& myvector, size_t initialCapacity) {
+    myvector._capacity = initialCapacity;
+    myvector._size = 0;
+    myvector.data = new size_t[initialCapacity];
+    return myvector.data;
 }
 
 void freeVector(MyVector& vector0) {
@@ -22,7 +22,8 @@ void freeVector(MyVector& vector0) {
 
 void pushBack(MyVector& myVector, size_t value){
     if (myVector._size < myVector._capacity) {
-        myVector.data[++myVector._size] = value;
+        myVector.data[myVector._size] = value;
+        myVector._size++;
     }
     return;
 }
