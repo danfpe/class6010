@@ -200,7 +200,7 @@ void MyVector<T>::popBack()
 template <typename T>
 void MyVector<T>::growVector()
 {
-    setCapacity(_capacity * 2);
+    _capacity = _capacity * 2;
     T* temp = new T (_capacity * 2);
     for (int i = 0; i < _size; i++) {
         temp[i] = data[i];

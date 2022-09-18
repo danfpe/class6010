@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "classPart.hpp"
+#include "structPart.hpp"
 #include "assert.h"
 
 int main(int argc, const char * argv[]) {
@@ -28,5 +29,15 @@ int main(int argc, const char * argv[]) {
     assert(myvector.getValue(0) == 123);
     assert(myvector.getValue(1) == 100);
     assert(myvector.getValue(2) == 200);
+    
+    // struct
+    MyVector0 vector0;
+    vector0 = makeVector(10);
+    pushBack(vector0, 23);
+    pushBack(vector0, 100);
+    pushBack(vector0, 200);
+    std::cout << "struct vector first element: " << get(vector0, 0) << "\n";
+    set(vector0, 0, 101);
+    std::cout << "reset first element: " << get(vector0, 0) << "\n";
     return 0;
 }

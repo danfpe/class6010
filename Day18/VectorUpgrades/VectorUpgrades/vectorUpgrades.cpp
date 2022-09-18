@@ -146,7 +146,7 @@ void MyVector::popBack()
 
 void MyVector::growVector()
 {
-    setCapacity(_capacity * 2);
+    _capacity = _capacity * 2;
     size_t* temp = new size_t (_capacity * 2);
     for (int i = 0; i < _size; i++) {
         temp[i] = data[i];
